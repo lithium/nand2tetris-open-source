@@ -17,6 +17,7 @@
 
 package SimulatorsGUI;
 
+import Hack.Events.ProgramEvent;
 import HackGUI.*;
 import Hack.VMEmulator.*;
 import Hack.CPUEmulator.*;
@@ -104,6 +105,10 @@ public class VMEmulatorComponent extends HackSimulatorComponent implements VMEmu
 
     public void loadProgram() {
         program.loadProgram();
+    }
+
+    public void loadProgram(java.lang.String path) {
+        program.notifyProgramListeners(ProgramEvent.LOAD, path);
     }
 
     /**

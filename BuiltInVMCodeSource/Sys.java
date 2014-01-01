@@ -25,8 +25,9 @@ import Hack.VMEmulator.TerminateVMProgramThrowable;
  */
 
 public class Sys extends JackOSClass {
+    public static java.lang.String[] mainArgs;
 
-	public static void init() throws TerminateVMProgramThrowable {
+    public static void init() throws TerminateVMProgramThrowable {
 		callFunction("Memory.init");
 		callFunction("Math.init");
 		callFunction("Screen.init");
@@ -35,6 +36,18 @@ public class Sys extends JackOSClass {
 		callFunction("Main.main");
 		infiniteLoop("Program Halted: Main.main finished execution");
 	}
+
+
+    public static short argumentCount() throws TerminateVMProgramThrowable {
+        return (short)mainArgs.length;
+    }
+
+    public static short argument(short argumentNumber) throws TerminateVMProgramThrowable {
+        if (argumentNumber >= mainArgs.length || argumentNumber < 0) {
+            callFunction("Sys.error", SYS_ARGUMENT_ILLEGAL_INDEX);
+        }
+        return javaStringToJackStringUsingVM(mainArgs[argumentNumber]);
+    }
 
 	public static void halt() throws TerminateVMProgramThrowable {
 		infiniteLoop("Program Halted");

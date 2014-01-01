@@ -49,7 +49,9 @@ class JackOSClass extends BuiltInVMClass {
 	public static final short STRING_SETINT_INSUFFICIENT_CAPACITY = 19;
 	public static final short OUTPUT_MOVECURSOR_ILLEGAL_POSITION = 20;
 
-	/**
+    public static final short SYS_ARGUMENT_ILLEGAL_INDEX = 21;
+
+    /**
 	 * Converts a java string to a Jack String by using whatever implementation
 	 * of the Jack class String is available (String.vm if available, else
 	 * built-in): Constructs a string using String.new and then fills it

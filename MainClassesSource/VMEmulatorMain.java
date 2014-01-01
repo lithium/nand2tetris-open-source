@@ -19,7 +19,11 @@ import Hack.Controller.*;
 import Hack.VMEmulator.*;
 import HackGUI.*;
 import SimulatorsGUI.*;
+import builtInVMCode.Sys;
+
 import javax.swing.*;
+import java.net.URL;
+import java.util.Arrays;
 
 /**
  * The VM Emulator.
@@ -29,23 +33,33 @@ public class VMEmulatorMain
   /**
    * The command line VM Emulator program.
    */
-  public static void main(String[] args) {
-        if (args.length > 1)
-            System.err.println("Usage: java CPUEmulatorMain [script name]");
-        else if (args.length == 0) {
-            try {
-                UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-            } catch (Exception e) {
-            }
+  public static void main(String[] args)
+  {
+    Sys.mainArgs = args;
 
-            VMEmulatorGUI simulatorGUI = new VMEmulatorComponent();
-            ControllerGUI controllerGUI = new ControllerComponent();
-            VMEmulatorApplication application =
-                new VMEmulatorApplication(controllerGUI, simulatorGUI, "bin/scripts/defaultVM.txt",
-                                          "bin/help/vmUsage.html", "bin/help/vmAbout.html");
-        }
-        else
-            new HackController(new VMEmulator(), args[0]);
+    try {
+        UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+    } catch (Exception e) {
     }
+
+    VMEmulatorComponent simulatorGUI = new VMEmulatorComponent();
+    ControllerGUI controllerGUI = new ControllerComponent();
+    VMEmulatorApplication application =
+        new VMEmulatorApplication(controllerGUI, simulatorGUI, "bin/scripts/defaultVM.txt",
+                                  "bin/help/vmUsage.html", "bin/help/vmAbout.html");
+
+    if (args.length > 0) {
+        Sys.mainArgs = Arrays.copyOfRange(args, 1, args.length);
+
+        if (args[0].endsWith(".tst")) {
+          new HackController(new VMEmulator(), args[0]);
+
+        }
+        else {
+            simulatorGUI.loadProgram(args[0]);
+        }
+    }
+
+  }
 }
 
