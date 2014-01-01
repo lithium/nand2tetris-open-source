@@ -33,6 +33,7 @@ public class Sys extends JackOSClass {
 		callFunction("Screen.init");
 		callFunction("Output.init");
 		callFunction("Keyboard.init");
+        callFunction("File.init");
 		callFunction("Main.main");
 		infiniteLoop("Program Halted: Main.main finished execution");
 	}

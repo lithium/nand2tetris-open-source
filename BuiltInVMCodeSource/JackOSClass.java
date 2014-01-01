@@ -51,6 +51,10 @@ class JackOSClass extends BuiltInVMClass {
 
     public static final short SYS_ARGUMENT_ILLEGAL_INDEX = 21;
 
+    public static final short FILE_UNKNOWN_FILEHANDLE = 30;
+    public static final short FILE_NOT_OPEN_FOR_READING = 31;
+    public static final short FILE_NOT_OPEN_FOR_WRITING = 32;
+
     /**
 	 * Converts a java string to a Jack String by using whatever implementation
 	 * of the Jack class String is available (String.vm if available, else
