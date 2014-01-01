@@ -14,6 +14,18 @@ MIT Press 2005. If you modify the contents of this file, please document and
 mark your changes clearly, for the benefit of others.
 
 
+2.6L
+====
+
+
+General
+-------
+Added: Sys.argument, Sys.argumentCount() for access to command-line arguments.
+Added: BuiltinVMCode File library, for access to host system files. 
+
+Author: Matthew Wiggins
+
+
 2.5
 ===
 
