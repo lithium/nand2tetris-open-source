@@ -14,6 +14,12 @@ MIT Press 2005. If you modify the contents of this file, please document and
 mark your changes clearly, for the benefit of others.
 
 
+Modified to add the requiste builtinVMCode to allow for reading and writing 
+files on the host computer.  This was to provide the ability to use Jack as 
+the choice for the High Level language used to build the Assembler, VM and 
+Compiler in chapters 6 through 11. -- Wiggins
+
+
 Contents
 --------
 
