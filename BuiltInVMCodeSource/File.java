@@ -28,10 +28,11 @@ public class File extends JackOSClass
 
     public static short open(short filename, short writable) throws TerminateVMProgramThrowable, FileNotFoundException, IOException
     {
-        short filenameLength = readMemory(filename+1);
+        int filenameLength = callFunction("String.length", filename);
         StringBuilder sb = new StringBuilder();
         for (int i=0; i < filenameLength; i++) {
-            sb.append((char)readMemory(filename+2+i));
+            int c = callFunction("String.charAt", filename, i);
+            sb.append((char)c);
         }
 
         FileHandle fh = new FileHandle();
@@ -81,10 +82,10 @@ public class File extends JackOSClass
             callFunction("Sys.error", FILE_NOT_OPEN_FOR_WRITING);
         }
 
-        short strlen = readMemory(str+1);
+        int strlen = callFunction("String.length", str);
         char buffer[] = new char[strlen];
         for (int i=0; i < strlen; i++) {
-            buffer[i] = (char)readMemory(str+2+i);
+            buffer[i] = (char)callFunction("String.charAt", str, i);
         }
         fh.writer.write(buffer, 0, strlen);
     }
