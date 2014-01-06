@@ -3,6 +3,7 @@ package builtInVMCode;
 import Hack.VMEmulator.TerminateVMProgramThrowable;
 
 import java.io.*;
+import java.lang.String;
 import java.util.ArrayList;
 
 /**
@@ -141,6 +142,31 @@ public class File extends JackOSClass
             return 1;
         }
         return (short)(fh.reader.ready() ? 1 : 0);
+    }
+
+
+
+
+    public static short list(short directoryName) throws TerminateVMProgramThrowable
+    {
+        short ret;
+        java.io.File dir = new java.io.File(jackStringToJavaStringUsingVM(directoryName));
+        if (dir == null) {
+            return 0;
+        }
+        String[] files = dir.list();
+        if (files == null) {
+            return 0;
+        }
+
+        ret = callFunction("Array.new", files.length+1);
+        writeMemory(ret, files.length);
+        for (int i=0; i < files.length; i++) {
+            short s = javaStringToJackStringUsingVM(files[i]);
+            writeMemory(ret+i+1, s);
+        }
+
+        return ret;
     }
 
 }
