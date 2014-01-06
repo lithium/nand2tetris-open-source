@@ -127,7 +127,7 @@ public class VMProgram extends InteractiveComputerPart
         // First scan
 		staticRange.clear();
 		functions.clear();
-		builtInAccessStatus = BUILTIN_ACCESS_UNDECIDED;
+		builtInAccessStatus = BUILTIN_ACCESS_AUTHORIZED;
         Hashtable symbols = new Hashtable();
 		nextPC = 0;
         for (int i = 0; i < files.length; i++) {
